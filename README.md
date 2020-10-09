@@ -1,2 +1,2 @@
 # log
-Support Formatter discard level, time, debug entry name.
+Simple log support stdout, file, syslog
