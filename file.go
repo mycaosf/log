@@ -7,35 +7,35 @@ import (
 	"time"
 )
 
-func (p *logFile) logDefault(format string, args ...interface{}) {
+func (p *logFile) logDefault(level int, format string, args ...interface{}) {
 	w := p.flog
-	fmt.Fprintf(w, "%s %s ", time.Now().Local().Format(timeFormatDefault), levelNames[p.level])
+	fmt.Fprintf(w, "%s %s ", time.Now().Local().Format(timeFormatDefault), levelNames[level])
 	fmt.Fprintf(w, format, args...)
 	fmt.Fprintf(w, "\n")
 }
 
 func (p *logFile) Fatalf(format string, args ...interface{}) {
 	if p.level >= LogLevelFatal {
-		p.log(format, args...)
+		p.log(LogLevelFatal, format, args...)
 		os.Exit(1)
 	}
 }
 
 func (p *logFile) Errorf(format string, args ...interface{}) {
 	if p.level >= LogLevelError {
-		p.log(format, args...)
+		p.log(LogLevelError, format, args...)
 	}
 }
 
 func (p *logFile) Infof(format string, args ...interface{}) {
 	if p.level >= LogLevelInfo {
-		p.log(format, args...)
+		p.log(LogLevelInfo, format, args...)
 	}
 }
 
 func (p *logFile) Debugf(format string, args ...interface{}) {
 	if p.level >= LogLevelDebug {
-		p.log(format, args...)
+		p.log(LogLevelDebug, format, args...)
 	}
 }
 
@@ -80,7 +80,7 @@ func newFile(minLevel int, file io.WriteCloser) Log {
 type logFile struct {
 	logBase
 	flog io.WriteCloser
-	log  func(format string, args ...interface{})
+	log  func(level int, format string, args ...interface{})
 }
 
 const (

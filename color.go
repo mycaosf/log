@@ -20,9 +20,9 @@ func NewStdoutColor(minLevel int) Log {
 	return ret
 }
 
-func (p *logFileColor) logColor(format string, args ...interface{}) {
+func (p *logFileColor) logColor(level int, format string, args ...interface{}) {
 	w := p.flog
-	fmt.Fprintf(w, "%s \x1b[%dm%s ", time.Now().Local().Format(timeFormatDefault), levelColors[p.level], levelNames[p.level])
+	fmt.Fprintf(w, "%s \x1b[%dm%s ", time.Now().Local().Format(timeFormatDefault), levelColors[level], levelNames[level])
 	fmt.Fprintf(w, format, args...)
 	fmt.Fprintf(w, "\x1b[0m\n")
 }
