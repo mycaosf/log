@@ -19,7 +19,7 @@ func New(logType, minLevel int, param string) (l Log, err error) {
 	case LogTypeFile:
 		l, err = NewFile(param, minLevel)
 	case LogTypeSyslog:
-		l, err = NewFile(param, minLevel)
+		l, err = NewSyslog(param, minLevel)
 	default:
 		err = ErrInvalidLogType
 	}
