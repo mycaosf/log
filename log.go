@@ -5,7 +5,7 @@ import (
 )
 
 //param:
-// - LogTypeNull, LogTypeStdout: ignore
+// - LogTypeNull, LogTypeStdout, LogTypeStdoutColor: ignore
 // - LogTypeSyslog: tag
 // - LogTypeFile: fileName
 func New(logType, minLevel int, param string) (l Log, err error) {
